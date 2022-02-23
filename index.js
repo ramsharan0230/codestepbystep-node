@@ -1,6 +1,7 @@
 const Http = require('http');
 const express = require('express');
 const path = require('path');
+const reqFilter = require('./middleware')
 
 const app = express()
 
@@ -13,18 +14,8 @@ app.get('/', (req, res)=>{
     res.render(`${pathName}/index`)
 })
 
-app.get('/home', (req, res)=>{
-    users = [
-        {
-            name: 'Mamtta shah',
-            email: 'shahmamtanepal@gmail.com'
-        },
-        {
-            name: 'Ram Sharan shah',
-            email: 'ramsharan0230@gmail.com'
-        }
-    ]
-    res.render('home', {users})
+app.get('/home', reqFilter, (req, res)=>{
+    res.render('home')
 })
 
 app.get('/about', (req, res)=>{
