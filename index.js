@@ -7,21 +7,32 @@ const app = express()
 const pathName = path.join(__dirname, 'views')
 
 // app.use(express.static(pathName))
+app.set('view engine', 'ejs')
 
 app.get('/', (req, res)=>{
-    res.sendFile(`${pathName}/index.html`)
+    res.render(`${pathName}/index`)
 })
 
 app.get('/home', (req, res)=>{
-    res.sendFile(`${pathName}/home.html`)
+    users = [
+        {
+            name: 'Mamtta shah',
+            email: 'shahmamtanepal@gmail.com'
+        },
+        {
+            name: 'Ram Sharan shah',
+            email: 'ramsharan0230@gmail.com'
+        }
+    ]
+    res.render('home', {users})
 })
 
 app.get('/about', (req, res)=>{
-    res.sendFile(`${pathName}/about.html`)
+    res.render(`${pathName}/about`)
 })
 
 app.get('*', (req, res)=>{
-    res.sendFile(`${pathName}/404.html`)
+    res.render(`${pathName}/404`)
 })
 
 
