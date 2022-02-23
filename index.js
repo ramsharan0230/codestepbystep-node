@@ -14,17 +14,7 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/home', (req, res)=>{
-    users = [
-        {
-            name: 'Mamtta shah',
-            email: 'shahmamtanepal@gmail.com'
-        },
-        {
-            name: 'Ram Sharan shah',
-            email: 'ramsharan0230@gmail.com'
-        }
-    ]
-    res.render('home', {users})
+    res.render('home')
 })
 
 app.get('/about', (req, res)=>{
