@@ -7,6 +7,16 @@ const app = express()
 const pathName = path.join(__dirname, 'views')
 
 // app.use(express.static(pathName))
+
+const reqFilter = (req, res, next)=>{
+    if(req.query.age==18)
+        next()
+    else
+        res.send('You are not privilaged')
+}
+
+app.use(reqFilter)
+
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res)=>{
@@ -14,17 +24,7 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/home', (req, res)=>{
-    users = [
-        {
-            name: 'Mamtta shah',
-            email: 'shahmamtanepal@gmail.com'
-        },
-        {
-            name: 'Ram Sharan shah',
-            email: 'ramsharan0230@gmail.com'
-        }
-    ]
-    res.render('home', {users})
+    res.render('home')
 })
 
 app.get('/about', (req, res)=>{
