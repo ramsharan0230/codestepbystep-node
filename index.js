@@ -6,3 +6,4 @@ const productEdit = require('./product/edit')
 products.products()
 // products.productDelete(); 
 // productEdit()
+
