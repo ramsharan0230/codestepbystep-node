@@ -43,4 +43,17 @@ app.delete('/products/:_id', async(req, res)=>{
     res.send(result)
 })
 
+//search product
+app.get('/products/search/:key', async(req, res)=>{
+    console.log(req.params.key);
+    let result = await Product.find({
+        "$or": [
+            { "title": { $regex: req.params.key} },
+            { "category": { $regex: req.params.key} },
+            { "memory": { $regex: req.params.key} }
+        ]
+    });
+    res.send(result)
+})
+
 app.listen(8080)
