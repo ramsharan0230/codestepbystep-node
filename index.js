@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 require('./config');
 
 const Product = require('./product');
@@ -55,5 +56,22 @@ app.get('/products/search/:key', async(req, res)=>{
     });
     res.send(result)
 })
+
+//file upload
+const fileUploadUsingMulter = multer({
+    storage:multer.diskStorage({
+        destination: (req, file, callback)=>{
+            callback(null, 'images')
+        },
+        filename: (req, file, callback)=>{
+            callback(null, file.fieldname+'_'+Date.now()+'.jpg')
+        }
+    })
+}).single('file');
+
+app.post('/products/file-upload', fileUploadUsingMulter, async(req, res)=>{
+    res.send('file uploaded successfully')
+})
+
 
 app.listen(8080)
