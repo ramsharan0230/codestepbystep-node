@@ -1,14 +1,23 @@
 const express = require('express');
 const multer = require('multer');
+const EventEmitter = require('express');
+
 require('./config');
 
 const Product = require('./product');
 
 const app = express();
 app.use(express.json())
+const event = new EventEmitter();
+
+event.on('fireMe', (a)=>{
+    console.log(a)
+})
 
 app.get('/', (req, res)=>{
     res.send('hello there')
+    var a = "forefpx fpr tje nation"
+    event.emit('fireMe', a)
 })
 
 //get all data
